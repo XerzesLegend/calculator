@@ -1,9 +1,9 @@
-#main{
+body{
     display: flex;
     align-items: center;
     justify-content: center;
 }
-#main div{
+body div{
     border-radius: 16px;
     border: transparent;
 }
@@ -23,10 +23,29 @@
     width: 450px;
     height: 100px;
     background-color: rgba(255, 255, 255, 0.932);
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    font-size: 48px;
 }
 
 #buttons{
-    flex:1;
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
     width: 450px;
     background-color: rgba(255, 255, 255, 0.548);
+
 }
+
+#clear, #delete{
+    flex: 1 50% !important;
+}
+
+#buttons button{
+    flex: 1 25%;
+    padding: 0;
+    font-size: 32px;
+    font-weight: 1000;
+}
+
