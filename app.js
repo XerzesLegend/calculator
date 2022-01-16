@@ -1,22 +1,19 @@
 const display = document.querySelector('#screen');
 let btns = document.querySelectorAll('button');
 
-let displayValue = "";
 btns = Array.from(btns);
 btns.forEach(btn => btn.addEventListener('click', function(e){
-    if(e.id == "clear"){
+    if(e.target.id == "clear"){
         display.textContent = ""
-    }
-    else if(e.id == "delete"){
-        let temp = displayValue.length - 1;
-        displayValue = displayValue.slice(0, temp)
-    }
-    else{
-        displayValue = displayValue + e.textContent;
+    } else if (e.target.id == "delete"){
+        let temp = display.textContent.length - 1;
+        display.textContent = display.textContent.slice(0, temp)
+    }else {
+        display.textContent = display.textContent + e.target.textContent;
     }
 }));
 
-display.textContent = displayValue;
+
 
 
 
