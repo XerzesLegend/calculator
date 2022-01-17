@@ -23,7 +23,18 @@ btns.forEach(btn => btn.addEventListener('click', function(e){
         }
     }
     else if (e.target.id == "zero"){
-        display.textContent = display.textContent + e.target.textContent;
+        if(display.textContent != ""){
+            if(checkForOperators(display.textContent)){
+                let temp = returnFunctionInListForm(display.textContent);
+                if(temp[1] != ""){
+                    display.textContent = display.textContent + e.target.textContent;
+                }
+            }
+            else{
+                display.textContent = display.textContent + e.target.textContent;
+            }
+        }
+        
     }   
     else {
         display.textContent = display.textContent + e.target.textContent;
@@ -39,19 +50,19 @@ function returnFunctionInListForm(func){
     let lst = [];
     if(func.includes('x')){
         temp = func.split('x');
-        lst = [parseInt(temp[0]), parseInt(temp[1]), 'multiply']
+        lst = [temp[0], temp[1], 'multiply']
     }
     else if(func.includes('+')){
         temp = func.split('+');
-        lst = [parseInt(temp[0]), parseInt(temp[1]), 'add']
+        lst = [temp[0], temp[1], 'add']
     }
     else if(func.includes('-')){
         temp = func.split('-');
-        lst = [parseInt(temp[0]), parseInt(temp[1]), 'subtract']
+        lst = [temp[0], temp[1], 'subtract']
     }
     else if(func.includes('÷')){
         temp = func.split('÷');
-        lst = [parseInt(temp[0]), parseInt(temp[1]), 'divide']
+        lst = [temp[0], temp[1], 'divide']
     }
     return lst
 }
@@ -72,6 +83,8 @@ function divide(a,b){
     return a/b ;
 }
 function operate(func){
+    func[0] = parseInt(func[0]);
+    func[1] = parseInt(func[1]);
     if(func[2] == "add"){
         return add(func[0],func[1]);
     }
