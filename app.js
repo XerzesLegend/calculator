@@ -35,6 +35,30 @@ btns.forEach(btn => btn.addEventListener('click', function(e){
             }
         }
         
+    } 
+    else if (e.target.id == "dot"){
+        if(display.textContent == ""){
+            display.textContent = display.textContent + '0' + e.target.textContent;
+        }
+        else{
+            let cond = checkForOperators(display.textContent);
+            let temp = returnFunctionInListForm(display.textContent);
+            if(cond){
+                if(temp[1] == ""){
+                    display.textContent = display.textContent + '0' + e.target.textContent;
+                }
+                else if(!temp[1].includes('.')){
+                    display.textContent = display.textContent + e.target.textContent;
+                }  
+            }
+
+            else{
+                if(!(display.textContent.includes('.'))){
+                    display.textContent = display.textContent + e.target.textContent;
+                }
+            }
+        }
+        
     }   
     else {
         display.textContent = display.textContent + e.target.textContent;
@@ -71,20 +95,20 @@ function returnFunctionInListForm(func){
 
 
 function add(a,b){
-    return a+b;
+    return (a+b).toFixed(2);
 }
 function subtract(a,b){
-    return a-b;
+    return (a-b).toFixed(2);
 }
 function multiply(a,b){
-    return a*b;
+    return (a*b).toFixed(2);
 }
 function divide(a,b){
-    return a/b ;
+    return (a/b).toFixed(2);
 }
 function operate(func){
-    func[0] = parseInt(func[0]);
-    func[1] = parseInt(func[1]);
+    func[0] = parseFloat(func[0]);
+    func[1] = parseFloat(func[1]);
     if(func[2] == "add"){
         return add(func[0],func[1]);
     }
@@ -101,6 +125,15 @@ function operate(func){
 
 function checkForOperators(func){
     if(func.includes('x') || func.includes('-') || func.includes('+') || func.includes('÷')){
+        return true
+    }
+    else{
+        return false
+    }
+}
+
+function checkForDot(func){
+    if(func.includes('.')){
         return true
     }
     else{
