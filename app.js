@@ -3,12 +3,29 @@ let btns = document.querySelectorAll('button');
 
 btns = Array.from(btns);
 btns.forEach(btn => btn.addEventListener('click', function(e){
+    let cond = (e.target.id == "add") || (e.target.id == "div") || (e.target.id == "mult") || (e.target.id == "sub");
     if(e.target.id == "clear"){
         display.textContent = ""
-    } else if (e.target.id == "delete"){
+    } 
+    else if (e.target.id == "delete"){
         let temp = display.textContent.length - 1;
         display.textContent = display.textContent.slice(0, temp)
-    }else {
+    }
+    else if (e.target.id == "equal"){
+        display.textContent = operate(returnFunctionInListForm(display.textContent));
+    }
+    else if (cond){
+        if (checkForOperators(display.textContent)){
+            display.textContent = operate(returnFunctionInListForm(display.textContent)) + e.target.textContent; 
+        }
+        else{
+            display.textContent = display.textContent + e.target.textContent;
+        }
+    }
+    else if (e.target.id == "zero"){
+        display.textContent = display.textContent + e.target.textContent;
+    }   
+    else {
         display.textContent = display.textContent + e.target.textContent;
     }
 }));
@@ -17,24 +34,27 @@ btns.forEach(btn => btn.addEventListener('click', function(e){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function returnFunctionInListForm(func){
+    let temp = [];
+    let lst = [];
+    if(func.includes('x')){
+        temp = func.split('x');
+        lst = [parseInt(temp[0]), parseInt(temp[1]), 'multiply']
+    }
+    else if(func.includes('+')){
+        temp = func.split('+');
+        lst = [parseInt(temp[0]), parseInt(temp[1]), 'add']
+    }
+    else if(func.includes('-')){
+        temp = func.split('-');
+        lst = [parseInt(temp[0]), parseInt(temp[1]), 'subtract']
+    }
+    else if(func.includes('÷')){
+        temp = func.split('÷');
+        lst = [parseInt(temp[0]), parseInt(temp[1]), 'divide']
+    }
+    return lst
+}
 
 
 
@@ -51,17 +71,26 @@ function multiply(a,b){
 function divide(a,b){
     return a/b ;
 }
-function operate(a,b, op){
-    if(op == "add"){
-        return add(a,b);
+function operate(func){
+    if(func[2] == "add"){
+        return add(func[0],func[1]);
     }
-    else if(op == "subtract"){
-        return subtract(a,b);
+    else if(func[2] == "subtract"){
+        return subtract(func[0],func[1]);
     }
-    else if(op == "multiply"){
-        return multiply(a,b);
+    else if(func[2] == "multiply"){
+        return multiply(func[0],func[1]);
     }
-    else if(op == "divide"){
-        return divide(a,b);
+    else if(func[2] == "divide"){
+        return divide(func[0],func[1]);
+    }
+}
+
+function checkForOperators(func){
+    if(func.includes('x') || func.includes('-') || func.includes('+') || func.includes('÷')){
+        return true
+    }
+    else{
+        return false
     }
 }
