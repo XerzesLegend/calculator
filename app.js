@@ -107,20 +107,24 @@ function divide(a,b){
     return (a/b).toFixed(2);
 }
 function operate(func){
+    let ans;
     func[0] = parseFloat(func[0]);
     func[1] = parseFloat(func[1]);
     if(func[2] == "add"){
-        return add(func[0],func[1]);
+        ans = add(func[0],func[1]);
     }
     else if(func[2] == "subtract"){
-        return subtract(func[0],func[1]);
+        ans = subtract(func[0],func[1]);
     }
     else if(func[2] == "multiply"){
-        return multiply(func[0],func[1]);
+        ans = multiply(func[0],func[1]);
     }
     else if(func[2] == "divide"){
-        return divide(func[0],func[1]);
+        ans = divide(func[0],func[1]);
     }
+    ans = ans.toString();
+    ans = parseFloat(ans);
+    return (ans)
 }
 
 function checkForOperators(func){
