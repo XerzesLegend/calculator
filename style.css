@@ -2,6 +2,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: rgb(147, 241, 229);
 }
 body div{
     border-radius: 16px;
@@ -27,6 +28,7 @@ body div{
     align-items: flex-end;
     justify-content: flex-end;
     font-size: 48px;
+    padding: 8px;
 }
 
 #buttons{
@@ -49,3 +51,19 @@ body div{
     font-weight: 1000;
 }
 
+.digit{
+    background-color: rgb(133, 34, 34);
+    color: white;
+}
+#dot{
+    background-color: rgb(101, 1, 131);
+    color: white;
+}
+.op{
+    background-color: rgb(10, 0, 102);
+    color: white;
+}
+.func{
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
